@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let bombAmount = 20
     let squares = []
     let isGameOver = false
-    let flag = 0
+    let flags = 0
 
     console.log(grid);
 
@@ -63,9 +63,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // add flag with right click
     function addFlag(square) {
         if (isGameOver) return
-        if (!square.classList.contains('checked') && (flag < bombAmount)) {
+        if (!square.classList.contains('checked') && (flags < bombAmount)) {
             if (!square.classList.contains('flag')) {
                 square.classList.add('flag')
+                flags++
+                square.innerHTML = '🚩'
+                flagsLeft.innerHTML = bombAmount - flags
+                checkWin()
+            } else {
+                square.classList.remove('flag')
+                flags--
+                square.innerHTML = ''
+                flagsLeft.innerHTML = bombAmount - flags
             }
         }
     }
