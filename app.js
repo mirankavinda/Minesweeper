@@ -67,7 +67,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (square.classList.contains('bomb')) {
             gameOver()
+        } else {
+            let total = square.getAttribute('data')
+            if (total != 0) {
+                if (total == 1) square.classList.add('one')
+                if (total == 2) square.classList.add('two')
+                if (total == 3) square.classList.add('three')
+                if (total == 4) square.classList.add('four')
+                square.innerHTML = total
+                return
+            }
+            checkSquare(square)
         }
+        square.classList.add('checked')
+    }
+
+    // check near squares ones square is clicked
+    function checkSquare(square) {
+        const currentId = square.id
+        const isLeftEdge = (currentId % width === 0)
+        const isRightEdge = (currentId % width === width - 1)
+
+        setTimeout(function () {
+            if (currentId > 0 && !isLeftEdge) {
+                const newId = square[parseInt(currentId) - 1].id
+                const newSquare = document.getElementById(newId)
+                click(newSquare)
+            }
+            if (currentId > 9 && !isRightEdge) {
+                const newId = square[parseInt(currentId) + 1 - width].id
+                const newSquare = document.getElementById(newId)
+                click(newSquare)
+            }
+            if (currentId > 10) {
+                const newId = square[parseInt(currentId) - width].id
+                const newSquare = document.getElementById(newId)
+                click(newSquare)
+            }
+            if (currentId > 11 && !isLeftEdge) {
+                const newId = square[parseInt(currentId) - 1 - width].id
+                const newSquare = document.getElementById(newId)
+                click(newSquare)
+            }
+            if (currentId < 98 && !isRightEdge) {
+                const newId = square[parseInt(currentId) + 1].id
+                const newSquare = document.getElementById(newId)
+                click(newSquare)
+            }
+            if (currentId < 90 && !isLeftEdge) {
+                const newId = square[parseInt(currentId) - 1 + width].id
+                const newSquare = document.getElementById(newId)
+                click(newSquare)
+            }
+            if (currentId < 88 && isRightEdge) {
+                const newId = square[parseInt(currentId) + 1 + width].id
+                const newSquare = document.getElementById(newId)
+                click(newSquare)
+            }
+            if (currentId < 89) {
+                const newId = square[parseInt(currentId) + width].id
+                const newSquare = document.getElementById(newId)
+                click(newSquare)
+            }
+
+
+        }, 10)
     }
 
     function gameOver() {
