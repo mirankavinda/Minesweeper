@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // shuffled game array with random bombs
         const bombArray = Array(bombAmount).fill('bomb');
-        const emptyArray = Array(width * width - bombAmount).fill('vaild')
+        const emptyArray = Array(width * width - bombAmount).fill('valid')
         const gameArray = emptyArray.concat(bombArray)
         const shuffledArray = gameArray.sort(() => Math.random() - 0.5)
 
