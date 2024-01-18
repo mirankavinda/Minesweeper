@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid');
     const flagsLeft = document.querySelector('#flags-left')
+    const result = document.querySelector('#result')
     const width = 10
     let bombAmount = 20
     let squares = []
+    let isgameOver = false
 
     console.log(grid);
 
@@ -42,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const isLeftEdge = (i % width === 0)
             const isRightEdge = (i % width === width - 1)
 
-            console.log(squares)
             if (squares[i].classList.contains('valid')) {
                 if (i > 0 && !isLeftEdge && squares[i - 1].classList.contains('bomb')) total++
                 if (i > 9 && !isRightEdge && squares[i + 1 - width].classList.contains('bomb')) total++
@@ -61,5 +62,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function click(square) {
         console.log(square)
+        if (isgameOver) return
+        if (isgameOver || square.classList.contains('checked') || square.classList.contains('flag')) return
+
+        if (square.classList.contains('bomb')) {
+            gameOver(square)
+        }
+    }
+
+    function gameOver(square) {
+        XPathResult.innerHTML = 'BOOM! Game Over!'
+        isgameOver = true
+
+        //
     }
 })
