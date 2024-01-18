@@ -14,7 +14,7 @@
     border: 10px solid #dcd6bc;
 }
 
-div {
+.grid div {
     font-family: "Roboto Mono", monospace;
     font-size: 25px;
     width: 40px;
