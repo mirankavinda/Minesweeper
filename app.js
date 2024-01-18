@@ -33,9 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 click(square)
             })
 
-            // Control and left click
-            square.addEventListener('click', () => {
-                // addFlag(square)
+            // Control and right click
+            square.addEventListener('contextmenu', () => {
+                addFlag(square)
             })
         }
 
