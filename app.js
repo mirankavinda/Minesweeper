@@ -66,14 +66,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isgameOver || square.classList.contains('checked') || square.classList.contains('flag')) return
 
         if (square.classList.contains('bomb')) {
-            gameOver(square)
+            gameOver()
         }
     }
 
-    function gameOver(square) {
-        XPathResult.innerHTML = 'BOOM! Game Over!'
+    function gameOver() {
+        result.innerHTML = 'BOOM! Game Over!'
         isgameOver = true
 
-        //
+        // show all the bombs
+        squares.forEach(function (square) {
+            if (square.classList.contains('bomb')) {
+                square.innerHTML = '💣'
+                square.classList.remove('bomb')
+                square.classList.add('checked')
+            }
+        })
     }
 })
